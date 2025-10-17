@@ -38,7 +38,7 @@ if prompt := st.chat_input('Nachricht eingeben...'):
                     headers={'Content-Type': 'application/json'},
                     timeout=30
                 )
-                bot_response = response.text
+                bot_response = response.json().get('response', response.text)
                 st.write(bot_response)
                 st.session_state.messages.append({'role': 'assistant', 'content': bot_response})
             except Exception as e:
