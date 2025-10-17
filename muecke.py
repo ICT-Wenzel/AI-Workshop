@@ -7,7 +7,6 @@ st.set_page_config(page_title='Chat', layout='centered')
 # Webhook URL
 WEBHOOK_URL = st.secrets.get("WEBHOOK_URL", None)   
 
-
 # Titel
 st.title('🤖 Chat')
 
@@ -38,7 +37,17 @@ if prompt := st.chat_input('Nachricht eingeben...'):
                     headers={'Content-Type': 'application/json'},
                     timeout=30
                 )
-                bot_response = response.json().get('response', response.text)
+                response_data = response.json()
+                # Extrahiere den Text aus dem JSON
+                if isinstance(response_data, dict):
+                    # Versuche gängige Keys für die Antwort
+                    bot_response = (response_data.get('response') or 
+                                  response_data.get('answer') or 
+                                  response_data.get('message') or 
+                                  response_data.get('text') or
+                                  str(response_data))
+                else:
+                    bot_response = str(response_data)
                 st.write(bot_response)
                 st.session_state.messages.append({'role': 'assistant', 'content': bot_response})
             except Exception as e:
