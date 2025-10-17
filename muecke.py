@@ -41,7 +41,8 @@ if prompt := st.chat_input('Nachricht eingeben...'):
                 # Extrahiere den Text aus dem JSON
                 if isinstance(response_data, dict):
                     # Versuche gängige Keys für die Antwort
-                    bot_response = (response_data.get('response') or 
+                    bot_response = (response_data.get('output') or
+                                  response_data.get('response') or 
                                   response_data.get('answer') or 
                                   response_data.get('message') or 
                                   response_data.get('text') or
