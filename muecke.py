@@ -35,7 +35,7 @@ if prompt := st.chat_input('Nachricht eingeben...'):
                     WEBHOOK_URL, 
                     json=payload, 
                     headers={'Content-Type': 'application/json'},
-                    timeout=30
+                    timeout=120
                 )
                 response_data = response.json()
                 # Extrahiere den Text aus dem JSON
