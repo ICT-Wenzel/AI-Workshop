@@ -5,7 +5,7 @@ from requests.exceptions import RequestException
 st.set_page_config(page_title='Chat', layout='centered')
 
 # Webhook URL
-WEBHOOK_URL = st.secrets.get("WEBHOOK_URL", None)
+WEBHOOK_URL = st.secrets.get("WEBHOOK_URL", None)   
 
 
 # Titel
@@ -31,7 +31,7 @@ if prompt := st.chat_input('Nachricht eingeben...'):
     with st.chat_message('assistant'):
         with st.spinner('Antwort wird generiert...'):
             try:
-                payload = {'messages': st.session_state.messages}
+                payload = {'message': prompt}
                 response = requests.post(
                     WEBHOOK_URL, 
                     json=payload, 
