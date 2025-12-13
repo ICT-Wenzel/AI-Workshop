@@ -1,12 +1,12 @@
 import streamlit as st
 import requests
 from requests.exceptions import RequestException
+import os
 # Seiteneinstellungen
 st.set_page_config(page_title='Chat', layout='centered')
 
 # Webhook URL
-WEBHOOK_URL = st.secrets.get("WEBHOOK_URL", None)   
-
+WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 # Titel
 st.title('🤖 Chat')
 
